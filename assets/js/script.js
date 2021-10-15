@@ -7,7 +7,7 @@ var numeric = "0123456789";
 var specials = " !\\\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 //Used for debugging
-isDebugging = true;
+isDebugging = false;
 
 
 //#region User Input
@@ -86,27 +86,9 @@ var checkUseSpecials = function () {
    
 }
 //#endregion
+// Make one string of all characters chose by the user
+var makePossibleCharStr = function(useUppers, useLowers, useNumeric, useSpecials) {
 
-
-var generatePassword = function() {
-//debugger;
-  possibleChars = "";
-  var numOfChars = checkNumOfChars();
-  var useUppers = checkUseUppers();
-  var useLowers = checkUseLowers();
-  var useNumeric = checkUseNumeric();
-  var useSpecials = checkUseSpecials();
-
-  //debugger;
-  //Make sure they selected at least one type of character
-  //If not have them start over
-  if ((useUppers === false) && (useLowers===false)  && (useNumeric===false) && (useSpecials===false)){
-    window.alert("You need to select at least one type of character for a password please.");
-    generatePassword();
-  }
-  
-   // Make one string of all characters
-   // chose by the user
    if (useUppers == true) {
     possibleChars = uppers;
   }
@@ -119,10 +101,47 @@ var generatePassword = function() {
   if (useSpecials == true) {
     possibleChars = possibleChars + specials;
   }
+  return possibleChars;
+
+}
+
+
+var generatePassword = function() {
+//debugger;
+  possibleChars = "";
+  var numOfChars = checkNumOfChars();
+  var useUppers = checkUseUppers();
+  var useLowers = checkUseLowers();
+  var useNumeric = checkUseNumeric();
+  var useSpecials = checkUseSpecials();
+
+  //debugger;
+  //Make sure they selected at least one type of character, if not start over
+  if ((useUppers === false) && (useLowers===false)  && (useNumeric===false) && (useSpecials===false)){
+    window.alert("You need to select at least one type of character for a password please.");
+    generatePassword();
+  }
+
   
-   possibleCharsLen = possibleChars.length;
+  // make a string of all possible characters the user requested
+  possibleChars = makePossibleCharStr(useUppers, useLowers, useNumeric, useSpecials);
+//debugger;
+  //How many characters in the possibleChars string
+  possibleCharsLen = possibleChars.length;
+  tempPWord = "";
+  // randomly pick the proper characters
+  //outter loop for total number of characters
+  for (let i = 0; i < (numOfChars-1); i++) {
+    newCharLoc = Math.floor(Math.random()* possibleCharsLen);
+    newChar = possibleChars.charAt(newCharLoc);
+    tempPWord = tempPWord + newChar;
+    
+  }
+
+  
+  
    console.log("Length of possibleChars " + possibleCharsLen);
-  string = possibleChars;
+  string = tempPWord;
   return string;
 
  
