@@ -109,11 +109,16 @@ var makePossibleCharStr = function(useUppers, useLowers, useNumeric, useSpecials
 var generatePassword = function() {
 //debugger;
   possibleChars = "";
-  var numOfChars = checkNumOfChars();
-  var useUppers = checkUseUppers();
-  var useLowers = checkUseLowers();
-  var useNumeric = checkUseNumeric();
-  var useSpecials = checkUseSpecials();
+  let numOfChars = checkNumOfChars();
+  let useUppers = checkUseUppers();
+  let useLowers = checkUseLowers();
+  let useNumeric = checkUseNumeric();
+  let useSpecials = checkUseSpecials();
+  let hasAnUpper = false;
+  let hasALower = false;
+  let hasANumeric = false;
+  let hasASpecial = false;
+  let meetsRequirements = false;
 
   //debugger;
   //Make sure they selected at least one type of character, if not start over
@@ -128,15 +133,46 @@ var generatePassword = function() {
 //debugger;
   //How many characters in the possibleChars string
   possibleCharsLen = possibleChars.length;
-  tempPWord = "";
-  // randomly pick the proper characters
-  //outter loop for total number of characters
-  for (let i = 0; i < (numOfChars-1); i++) {
-    newCharLoc = Math.floor(Math.random()* possibleCharsLen);
-    newChar = possibleChars.charAt(newCharLoc);
-    tempPWord = tempPWord + newChar;
-    
-  }
+
+  //lets make a while loop to make sure each of the 
+  //types of characters is selected
+  while (meetsRequirements === false) 
+  {
+    //reset the variables incase this is not the first loop
+    tempPWord = "";
+    hasANumeric = false;
+    hasALower = false;
+    hasANumeric = false;
+    hasASpecial = false;
+    // randomly pick the proper characters
+    //outter loop for total number of characters
+    for (let i = 0; i < (numOfChars-1); i++) {
+      newCharLoc = Math.floor(Math.random()* possibleCharsLen);
+      newChar = possibleChars.charAt(newCharLoc);
+      //Lets see what type of character it is
+      if (uppers.indexOf(newChar) > 0) {
+        hasAnUpper = true;
+      }
+      if (lowers.indexOf(newChar)> 0 ) {
+        hasALower = true;
+      }
+      if (numeric.indexOf(newChar) > 0) {
+        hasANumeric = true;
+      }
+      if (specials.indexOf(newChar)> 0 ) {
+        hasASpecial = true;
+      }
+
+      tempPWord = tempPWord + newChar;
+      
+    }
+    //debugger;
+
+    // lets make sure all required character types are in the password
+    if ((useUppers === hasAnUpper)&& (useLowers === hasALower) && (useNumeric === hasANumeric) && (useSpecials === hasASpecial)) {
+      meetsRequirements = true;
+    }
+  }//end while haveAllTypes
 
   
   
