@@ -6,8 +6,7 @@ var lowers = "abcdefghijklmnopqrstuvwxyz";
 var numeric = "0123456789";
 var specials = " !\\\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
-//Used for debugging
-isDebugging = false;
+
 
 
 //#region User Input
@@ -15,11 +14,7 @@ isDebugging = false;
 // Check for user input and validate it
 var checkNumOfChars = function () {
   
-  if(isDebugging) {
-    return numOfChars =10;
-    
-  } else 
-  {
+  
       var numOfChars = window.prompt("How many characters long do you want the password (8-128)?");
       if (numOfChars < 8) {
         window.alert("Your password needs to be between 8-128 characters");
@@ -38,7 +33,7 @@ var checkNumOfChars = function () {
         window.alert("Your password needs to be between 8-128 characters");
         checkNumOfChars();
       }
-    } //end debugging
+    
     
 }
 
@@ -105,9 +100,8 @@ var makePossibleCharStr = function(useUppers, useLowers, useNumeric, useSpecials
 
 }
 
-
 var generatePassword = function() {
-//debugger;
+
   possibleChars = "";
   let numOfChars = checkNumOfChars();
   let useUppers = checkUseUppers();
@@ -120,17 +114,16 @@ var generatePassword = function() {
   let hasASpecial = false;
   let meetsRequirements = false;
 
-  //debugger;
+ 
   //Make sure they selected at least one type of character, if not start over
   if ((useUppers === false) && (useLowers===false)  && (useNumeric===false) && (useSpecials===false)){
     window.alert("You need to select at least one type of character for a password please.");
     generatePassword();
   }
 
-  
   // make a string of all possible characters the user requested
   possibleChars = makePossibleCharStr(useUppers, useLowers, useNumeric, useSpecials);
-//debugger;
+
   //How many characters in the possibleChars string
   possibleCharsLen = possibleChars.length;
 
@@ -146,10 +139,16 @@ var generatePassword = function() {
     hasASpecial = false;
     // randomly pick the proper characters
     //outter loop for total number of characters
-    for (let i = 0; i < (numOfChars-1); i++) {
+    //debugger;
+    console.log("numofChars = " + numOfChars);
+    for (let i = 0; i < (numOfChars); i++) {
+      //console.log("i= " + i);
+    
       newCharLoc = Math.floor(Math.random()* possibleCharsLen);
       newChar = possibleChars.charAt(newCharLoc);
-      //Lets see what type of character it is
+      // Lets see what type of character it is
+      // This way we make sure it has one of each type of 
+      // character requested
       if (uppers.indexOf(newChar) > 0) {
         hasAnUpper = true;
       }
@@ -166,30 +165,17 @@ var generatePassword = function() {
       tempPWord = tempPWord + newChar;
       
     }
-    //debugger;
-
+    
     // lets make sure all required character types are in the password
     if ((useUppers === hasAnUpper)&& (useLowers === hasALower) && (useNumeric === hasANumeric) && (useSpecials === hasASpecial)) {
       meetsRequirements = true;
     }
   }//end while haveAllTypes
 
-  
-  
-   console.log("Length of possibleChars " + possibleCharsLen);
   string = tempPWord;
   return string;
 
- 
-  
-  
-
 }
-
-
-
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
