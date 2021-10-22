@@ -1,7 +1,21 @@
 #Password Generator
 
+<img src="./assets/images/password.PNG"
+     alt="The user interface of the Password Generator Program."
+      />
+
+
+
+
+
+
+
+
+
 ## Purpose
-A website the offers to create a custom password for the user.  
+A website the offers to create a custom password for the user.
+User has the option to select from the following options.  
+##
     * Uppercase Characters
     * Lowercase Characters
     * Numerical Characters
@@ -12,6 +26,18 @@ A website the offers to create a custom password for the user.
 * HTML
 * CSS
 * Javascript
+
+
+## Demonstrates the following skills:
+
+## 
+    * Working with arrays
+    * Working with strings
+    * Working with complicated logic
+    * Validating user input
+
+
+
 
 ## Website
 https://tgtiburon.github.io/Password_Generator/
