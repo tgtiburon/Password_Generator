@@ -1,6 +1,6 @@
 #Password Generator
 
-<img src="./assets/images/password.PNG"
+<img src="./assets/images/Password.PNG"
      alt="The user interface of the Password Generator Program."
       />
 
