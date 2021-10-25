@@ -14,31 +14,37 @@ var specials = " !\\\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 // Check for user input and validate it
 var checkNumOfChars = function () {
   
+  let validNumber = false;
   
+  while (validNumber === false) {
       var numOfChars = window.prompt("How many characters long do you want the password (8-128)?");
       if (numOfChars < 8) {
         window.alert("Your password needs to be between 8-128 characters");
-        checkNumOfChars();
+        validNumber = false;
+        
       }
       else if (numOfChars > 128) {
         window.alert("Your password needs to be between 8-128 characters");
-        checkNumOfChars();
-
+        validNumber = false;
+        
       }
       else if (numOfChars >=8 && numOfChars <=128) {
+        validNumber = true;
         return numOfChars;
       }
       else 
       {
         window.alert("Your password needs to be between 8-128 characters");
-        checkNumOfChars();
+        validNumber = false;
+        
       }
     
     
-}
+  }// end while
+}// end checkNumbers
 
 var checkUseUppers = function () {
-  var useUppers = window.confirm("Would you like to use UPPER CASE LETTERS? Please click Okay for yes, and cancel for no.");
+  var useUppers = window.confirm("Would you like to use UPPER CASE LETTERS? Please click okay for yes, and cancel for no.");
     if (useUppers) {
       return true;
     }
@@ -48,7 +54,7 @@ var checkUseUppers = function () {
 
 }
 var checkUseLowers = function () {
-  var useLowers = window.confirm("Would you like to use LOWER CASE LETTERS? Please click Okay for yes, and cancel for no.");
+  var useLowers = window.confirm("Would you like to use LOWER CASE LETTERS? Please click okay for yes, and cancel for no.");
   
     if (useLowers) {
       return true;
@@ -59,7 +65,7 @@ var checkUseLowers = function () {
 
 }
 var checkUseNumeric = function () {
-  var useNumeric = window.confirm("Would you like to use Numerics? Please click Okay for yes, and cancel for no.");
+  var useNumeric = window.confirm("Would you like to use Numerics? Please click okay for yes, and cancel for no.");
   
     if (useNumeric) {
       return true ;
@@ -70,7 +76,7 @@ var checkUseNumeric = function () {
 
 }
 var checkUseSpecials = function () {
-  var useSpecials = window.confirm("Would you like to use SPECIAL CHARACTERS? Please click Okay for yes, and cancel for no.");
+  var useSpecials = window.confirm("Would you like to use SPECIAL CHARACTERS? Please click okay for yes, and cancel for no.");
   
     if (useSpecials) {
       return true;
@@ -103,7 +109,9 @@ var makePossibleCharStr = function(useUppers, useLowers, useNumeric, useSpecials
 var generatePassword = function() {
 
   possibleChars = "";
+  
   let numOfChars = checkNumOfChars();
+  // If they failed inputting number of characters properly recall it.
   let useUppers = checkUseUppers();
   let useLowers = checkUseLowers();
   let useNumeric = checkUseNumeric();
@@ -127,16 +135,17 @@ var generatePassword = function() {
   //How many characters in the possibleChars string
   possibleCharsLen = possibleChars.length;
 
+  //reset the variables incase this is not the first loop
+  tempPWord = "";
+  hasANumeric = false;
+  hasALower = false;
+  hasANumeric = false;
+  hasASpecial = false;
   //lets make a while loop to make sure each of the 
   //types of characters is selected
   while (meetsRequirements === false) 
   {
-    //reset the variables incase this is not the first loop
-    tempPWord = "";
-    hasANumeric = false;
-    hasALower = false;
-    hasANumeric = false;
-    hasASpecial = false;
+    
     // randomly pick the proper characters
     //outter loop for total number of characters
     //debugger;
