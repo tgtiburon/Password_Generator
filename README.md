@@ -13,7 +13,7 @@
 
 
 ## Purpose
-A website the offers to create a custom password for the user.
+A website that offers to create a custom password for the user.
 User has the option to select from the following options.  
 ##
     * Uppercase Characters
